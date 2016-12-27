@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Ball.png</file>
+        <file>background.jpeg</file>
+        <file>mirrow.jpg</file>
+    </qresource>
+</RCC>
