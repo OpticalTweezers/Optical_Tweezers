@@ -24,6 +24,6 @@ void Loading::progress_move(){
 
 void Loading::finish(){
     this->hide();
-    maingame.show();
+    game.show();
     this->show();
 }
