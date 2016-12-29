@@ -11,6 +11,7 @@ public:
     QPointF intersect_point(QLineF line);
     QPointF intersect_screen();
     void reset_point_at_screen();
+    Light reflect(QLineF l);
 };
 
 #endif // LIGHT_H

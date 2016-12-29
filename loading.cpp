@@ -1,4 +1,4 @@
-#include "loading.h"
+#include "Loading.h"
 #include "ui_loading.h"
 #include <QTimer>
 #include <QProgressBar>
@@ -14,14 +14,7 @@ Loading::~Loading(){
     delete ui;
 }
 
-void Loading::progress_move(){
-    for(int i=0;i<=100;i++){
-        for(int j=0;j<=1000000;j++){
-            ui->progressBar->setValue(i);
-        }
-    }
-}
-
+//加载结束，关闭加载窗口，弹出游戏主界面
 void Loading::finish(){
     this->hide();
     game.show();
