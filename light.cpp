@@ -10,7 +10,7 @@ Light::Light(QPointF p, double angle){
 }
 
 //拷贝构造函数
-Light::Light(QLineF line){
+Light::Light(QLineF &line){
     this->setLine(line);
 }
 
