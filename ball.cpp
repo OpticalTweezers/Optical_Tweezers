@@ -39,7 +39,9 @@ void Ball::move(){
     double dy=velocity.y();
     setPos(x()+dx,y()+dy);
 }
+void Ball::v_angel(){
 
+}
 
 /*     Non_use
 void Ball::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
