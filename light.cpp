@@ -53,7 +53,8 @@ void Light::reset_point_at_screen(){
 //光线与平面镜的反射
 Light Light::reflect(QLineF l){
     Light light(QPointF(0,0),0);
-    if(this->line().intersect(l,nullptr)!=1) return light;
+    if(this->line().intersect(l,nullptr)!=1) return light;  //If the class deﬁnition declares a move constructor or move assignment operator,
+                                                            //the implicitly declared copy constructor is deﬁned as deleted
     else {
         QPointF p=intersect_point(l);
         this->line().setP2(p);
