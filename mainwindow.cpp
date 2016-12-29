@@ -32,5 +32,4 @@ void MainWindow::on_Settings_clicked(){
 void MainWindow::on_StartGame_clicked(){
     this->hide();
     loading.show();
-    loading.progress_move();
 }
