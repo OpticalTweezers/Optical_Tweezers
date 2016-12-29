@@ -8,13 +8,13 @@ Light::Light(QPointF p, double angle){
     this->line().setLength(2500);
     this->reset_point_at_screen();
 }
-
-//拷贝构造函数
-Light::Light(QLineF &line){
-    this->setLine(line);
+Light::Light(Light &light){
 }
 
+
+
 //求光线与固定线段的交点
+
 QPointF Light::intersect_point(QLineF ln){
     double x0=this->line().p1().x();
     double y0=this->line().p2().y();
@@ -52,16 +52,17 @@ void Light::reset_point_at_screen(){
 
 //光线与平面镜的反射
 Light Light::reflect(QLineF l){
-    if(this->line.intersect(this,l)!=2) return -1;
+    Light light(QPointF(0,0),0);
+    if(this->line().intersect(l,nullptr)!=1) return light;
     else {
-        QPoint p=intersect_point(l);
-        this->line.setP2(p);
-        double alpha = this->line.angle();
+        QPointF p=intersect_point(l);
+        this->line().setP2(p);
+        double alpha = this->line().angle();
         double beta = l.angle();
         double ref_angle;
-        ref_angle = (2*beta-alpha)%360;
+        ref_angle = (2*beta-alpha)>360 ? (2*beta-alpha)-360:(2*beta-alpha);
         Light *r = new Light(p,ref_angle);
-        scene().addItem(r);
+        scene()->addItem(r);
     }
 }
 
