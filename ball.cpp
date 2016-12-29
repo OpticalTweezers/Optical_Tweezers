@@ -19,7 +19,7 @@ Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
     timer->start(100);
 }
-
+//判断出屏幕
 bool Ball::out_of_scene(){
     if(x()+pixmap().width()<0 ||x()>scene()->width()
         ||y()-pixmap().height()<0  ||y()>scene()->height())
@@ -27,7 +27,7 @@ bool Ball::out_of_scene(){
     else
         return false;
 }
-
+//ball运动
 void Ball::move(){
 
     if(out_of_scene()){
@@ -39,7 +39,9 @@ void Ball::move(){
     double dy=velocity.y();
     setPos(x()+dx,y()+dy);
 }
-void Ball::v_angel(){
+
+//ball受力改变velocity
+void Ball::v_change(QVector2D force){
 
 }
 
