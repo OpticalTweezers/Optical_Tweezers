@@ -60,7 +60,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="res.qrc">:/mainwindow/mainwindow.jpg</pixmap>
+     <pixmap>:/mainwindow/mainwindow.jpg</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="StartGame">
@@ -164,7 +164,7 @@ border: none</string>
      <x>0</x>
      <y>0</y>
      <width>1250</width>
-     <height>34</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -179,8 +179,6 @@ border: none</string>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="res.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

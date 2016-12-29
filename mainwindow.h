@@ -25,8 +25,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Settings settings;
-    Loading loading;
+    Settings *settings;
+    Loading *loading;
 };
 
 #endif // MAINWINDOW_H

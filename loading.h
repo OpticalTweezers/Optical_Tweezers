@@ -15,11 +15,12 @@ class Loading : public QMainWindow
 public:
     explicit Loading(QWidget *parent = 0);
     ~Loading();
-public slots:
-    void finish();
+private slots:
+    void progressing_change();
 private:
     Ui::Loading *ui;
-    Game game;
+    Game * game;
+    int progressing=0;
 };
 
 #endif // LOADING_H
