@@ -16,7 +16,6 @@ public:
     explicit Loading(QWidget *parent = 0);
     ~Loading();
 public slots:
-    void progress_move();
     void finish();
 private:
     Ui::Loading *ui;

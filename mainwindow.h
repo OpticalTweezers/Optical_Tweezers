@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "settings.h"
-#include "loading.h"
+#include "Settings.h"
+#include "Loading.h"
 #include "game.h"
 
 namespace Ui {
