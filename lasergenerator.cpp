@@ -1,7 +1,7 @@
 #include "Lasergenerator.h"
 #include "game.h"
 #include "light.h"
-
+extern Game*game;
 LaserGenerator::LaserGenerator(){
     setPixmap(QPixmap(":/image/laser-generator.jpg"));
     setPos(0,0);
@@ -13,8 +13,8 @@ void LaserGenerator::keyPressEvent(QKeyEvent *event){
 
     //空格键发射激光
     if(event->key()==Qt::Key_Space){
-        Light *light=new Light(QPoint(x()+5,y()),this->laser_angle);
-        scene()->addItem(light);
+        game->lights.append(new Light(QPoint(x()+5,y()),this->laser_angle));
+        scene()->addItem(game->lights[0]);
     }
 
     //左右方向键改变激光发射器的角度

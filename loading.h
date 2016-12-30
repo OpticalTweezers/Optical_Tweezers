@@ -21,6 +21,7 @@ private:
     Ui::Loading *ui;
     Game * game;
     int progressing=0;
+    QTimer *timer;
 };
 
 #endif // LOADING_H

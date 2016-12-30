@@ -14,3 +14,5 @@ Game::Game(){
     //set background
     scene->setBackgroundBrush(QBrush(QPixmap(":/images/background.jpeg")));
 }
+
+
