@@ -11,7 +11,7 @@ Loading::Loading(QWidget *parent) :
     ui->setupUi(this);
     ui->progressBar->setRange(0,10);
     ui->progressBar->setValue(0);
-    QTimer *timer=new QTimer();
+    timer=new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(progressing_change()));
     timer->start(300);
 }
@@ -27,7 +27,7 @@ void Loading::progressing_change(){
         this->close();
         game=new Game();
         game->show();
-        delete this;
+        timer->stop();
     }
 }
 

@@ -1,7 +1,7 @@
 #include "light.h"
 #include "game.h"
 #include <qmath.h>
-
+extern Game*game;
 Light::Light(QPointF p, double angle){
     this->line().setAngle(angle);
     this->line().setP1(p);
@@ -62,8 +62,8 @@ Light Light::reflect(QLineF l){
         double beta = l.angle();
         double ref_angle;
         ref_angle = (2*beta-alpha)>360 ? (2*beta-alpha)-360:(2*beta-alpha);
-        Light *r = new Light(p,ref_angle);
-        scene()->addItem(r);
+        game->lights.append(new Light(p,ref_angle));
+        scene()->addItem(game->lights[game->lights.size()-1]);
     }
 }
 
