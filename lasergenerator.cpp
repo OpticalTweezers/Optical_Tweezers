@@ -3,7 +3,7 @@
 #include "light.h"
 extern Game*game;
 LaserGenerator::LaserGenerator(){
-    setPixmap(QPixmap(":/image/laser-generator.jpg"));
+    setPixmap(QPixmap(":/images/laser_generator.jpg"));
     setPos(0,0);
     this->setTransformOriginPoint(5,1);
     laser_angle=0;

@@ -9,10 +9,15 @@ Game::Game(){
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     //add Ball
-    Ball *ball=new Ball();
+    ball=new Ball();
     scene->addItem(ball);
     //set background
     scene->setBackgroundBrush(QBrush(QPixmap(":/images/background.jpeg")));
+
+    //add laserGenerator
+    laserGenerator=new LaserGenerator();
+    scene->addItem(laserGenerator);
+    laserGenerator->setFocus();
 }
 
 
