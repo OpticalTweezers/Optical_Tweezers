@@ -2,6 +2,7 @@
 #define GAME_H
 #include <Ball.h>
 #include <light.h>
+#include <lasergenerator.h>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QBrush>
@@ -11,6 +12,9 @@ public:
     Game();
     QGraphicsScene *scene;
     QVector<Light*>lights;
+private:
+    Ball *ball;
+    LaserGenerator *laserGenerator;
 };
 
 #endif // GAME_H
