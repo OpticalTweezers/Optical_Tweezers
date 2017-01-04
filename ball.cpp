@@ -9,17 +9,27 @@
 extern Game *game;
 Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/Ball.png"));
+    setPos(400,300);
     //initialazation
-    velocity.setX(0);
-    velocity.setY(0);
+    velocity.setX(10);
+    velocity.setY(10);
     acceleration.setX(0);
     acceleration.setY(0);
 
-    QTimer *timer =new QTimer();
-    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
-    timer->start(100);
-}
+    QVector2D F(0,10);
+    qDebug()<<3;
+    QTimer *timer_a =new QTimer();
+    qDebug()<<2333;
+    connect(timer_a,SIGNAL(timeout()),this,SLOT(v_change(F)));
+    timer_a->start(100);
 
+    QTimer *timer_v =new QTimer();
+    connect(timer_v,SIGNAL(timeout()),this,SLOT(move()));
+    timer_v->start(100);
+
+
+}
+//判断出屏幕
 bool Ball::out_of_scene(){
     if(x()+pixmap().width()<0 ||x()>scene()->width()
         ||y()-pixmap().height()<0  ||y()>scene()->height())
@@ -27,20 +37,26 @@ bool Ball::out_of_scene(){
     else
         return false;
 }
-
+//ball运动
 void Ball::move(){
 
     if(out_of_scene()){
         scene()->removeItem(this);
         delete this;
+        qDebug()<<"gameover";
         return;
     }
     double dx=velocity.x();
     double dy=velocity.y();
     setPos(x()+dx,y()+dy);
+    //qDebug()<<3;
 }
-void Ball::v_angel(){
 
+//ball受力改变velocity
+void Ball::v_change(QVector2D force){
+    velocity.setX(velocity.x()+force.x());
+    velocity.setY(velocity.y()+force.y());
+    qDebug()<<velocity.x();
 }
 
 /*     Non_use

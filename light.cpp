@@ -1,16 +1,19 @@
 #include "light.h"
 #include "game.h"
 #include <qmath.h>
-
+extern Game*game;
 Light::Light(QPointF p, double angle){
     this->line().setAngle(angle);
     this->line().setP1(p);
     this->line().setLength(2500);
+    this->reset_point_at_screen();
+}
+Light::Light(Light &light){
 }
 
-Light::Light(QLineF line){
-    this->setLine(line);
-}
+
+
+//求光线与固定线段的交点
 
 QPointF Light::intersect_point(QLineF ln){
     double x0=this->line().p1().x();
@@ -29,6 +32,7 @@ QPointF Light::intersect_point(QLineF ln){
     }
 }
 
+//求出光线与屏幕的交点
 QPointF Light::intersect_screen(){
     QLineF up(0,0,scene()->width(),0);
     QLineF down(0,scene()->height(),scene()->width(),scene()->height());
@@ -41,6 +45,26 @@ QPointF Light::intersect_screen(){
     else return QPointF(-200,-200);
 }
 
+//重置终点为与屏幕的交点
 void Light::reset_point_at_screen(){
-
+    this->line().setP2(intersect_screen());
 }
+
+//光线与平面镜的反射
+Light Light::reflect(QLineF l){
+    Light light(QPointF(0,0),0);
+    if(this->line().intersect(l,nullptr)!=1) return light;  //If the class deﬁnition declares a move constructor or move assignment operator,
+                                                            //the implicitly declared copy constructor is deﬁned as deleted
+    else {
+        QPointF p=intersect_point(l);
+        this->line().setP2(p);
+        double alpha = this->line().angle();
+        double beta = l.angle();
+        double ref_angle;
+        ref_angle = (2*beta-alpha)>360 ? (2*beta-alpha)-360:(2*beta-alpha);
+        game->lights.append(new Light(p,ref_angle));
+        scene()->addItem(game->lights[game->lights.size()-1]);
+    }
+}
+
+

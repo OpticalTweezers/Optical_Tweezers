@@ -1,29 +1,38 @@
-#include "loading.h"
+#include "Loading.h"
 #include "ui_loading.h"
+#include <game.h>
 #include <QTimer>
-#include <QProgressBar>
+#include <QDebug>
 
 Loading::Loading(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Loading)
 {
     ui->setupUi(this);
+    ui->progressBar->setRange(0,10);
+    ui->progressBar->setValue(0);
+    timer=new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(progressing_change()));
+    timer->start(300);
 }
-
 Loading::~Loading(){
     delete ui;
 }
 
-void Loading::progress_move(){
-    for(int i=0;i<=100;i++){
-        for(int j=0;j<=1000000;j++){
-            ui->progressBar->setValue(i);
-        }
+void Loading::progressing_change(){
+    progressing++;
+    ui->progressBar->setValue(progressing);
+    qDebug()<<progressing;
+    if(progressing==10){
+        this->close();
+        game=new Game();
+        game->show();
+        timer->stop();
     }
 }
 
-void Loading::finish(){
-    this->hide();
-    game.show();
-    this->show();
-}
+
+
+
+
+

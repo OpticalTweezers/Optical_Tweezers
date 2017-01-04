@@ -15,22 +15,24 @@ TEMPLATE = app
 SOURCES += main.cpp \
     Game.cpp \
     Ball.cpp \
-    Mirrow.cpp \
-    lasergenerator.cpp \
-    light.cpp \
-    mainwindow.cpp \
-    loading.cpp \
-    settings.cpp
+    Mirror.cpp \
+    Light.cpp \
+    Lasergenerator.cpp \
+    Loading.cpp \
+    Mainwindow.cpp \
+    Settings.cpp \
+    Win_Zone.cpp
 
 HEADERS  += \
     Game.h \
     Ball.h \
-    Mirrow.h \
-    lasergenerator.h \
-    light.h \
-    mainwindow.h \
-    loading.h \
-    settings.h
+    Mirror.h \
+    Light.h \
+    Lasergenerator.h \
+    Settings.h \
+    Mainwindow.h \
+    Loading.h \
+    Win_Zone.h
 
 FORMS    += mainwindow.ui \
     loading.ui \
