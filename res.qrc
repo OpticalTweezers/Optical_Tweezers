@@ -3,5 +3,6 @@
         <file>Ball.png</file>
         <file>background.jpeg</file>
         <file>mirrow.jpg</file>
+        <file>laser_generator.jpg</file>
     </qresource>
 </RCC>
