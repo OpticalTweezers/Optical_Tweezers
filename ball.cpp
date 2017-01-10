@@ -102,6 +102,7 @@ void Ball::refract(Light light){
     refract_out.line().setAngle(gamma2);
     scene()->addItem(refract_in_ball);
     scene()->addItem(refract_out);
+    double force_angle = (light.line().angle()-refract_out.line().angle())/2+180;
 }
 
 //判断出屏幕
