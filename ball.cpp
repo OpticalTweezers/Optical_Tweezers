@@ -10,6 +10,8 @@ extern Game *game;
 Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/Ball.png"));
     setPos(400,300);
+    center.setX(Ball.pos().x()+radius);
+    center.setY(Ball.pos().y()+radius);
     //initialazation
     velocity.setX(10);
     velocity.setY(10);
@@ -29,6 +31,77 @@ Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
 
 
 }
+
+//球折射光线
+QPointF Ball::intersect_point(Light light){
+    double x0 = Ball.x()+radius;
+    double y0 = Ball.y()+radius;
+    double x1 = light.line().p1().x();
+    double x2 = light.line().p2().x();
+    double y1 = light.line().p1().y();
+    double y2 = light.line().p2().y();
+    if(x1=x2) return 0;//以后再写
+    else
+        double k = (y1-y2)/(x1-x2);
+        double r = Ball.radius;
+        double A = (k*k+1);
+        double B = 2*(-x0-k*k*x1+k*y1-k*y0);
+        double C = y1*y1+y0*y0+x0*x0+k*k*x1*x1-2*k*y1*x1+2*k*y0*x1-2*y1*y0-radius*radius;
+        double delta = B*B-4*A*C;
+
+        if(delta<=0) return -1;
+        else
+            double x3 = (-B+sqrt(delta))/(2*A);
+            double x4 = (-B+sqrt(delta))/(2*A);
+            double xi;
+            if((x3-x1)>(x4-x1)) xi=x4;
+            else xi=x3;
+            double yi = y1+k*(xi-x1);
+            QPointF intersect_point;
+            intersect_point.setX(xi);
+            intersect_point.setY(yi);
+            return intersect_point;
+}
+
+void Ball::refract(Light light){
+    QPointF p_in;
+    p_in.setX(intersect_point(light).x());//好像不成
+    p_in.setY(intersect_point(light).y());
+    QLineF normal1;
+    normal1.setP1(Ball.center);
+    normal1.setP2(p_in);
+    double alpha1 = normal1.angle();
+    double beta1 = light.line().angle();
+    double i1 = beta1-alpha1;//之后还要模一下？分类讨论？暂时搁置
+    double sinr1 = qSin(i1)*Ball.n;//讨论是否大于1
+    double r1 ;//=arcsin(sinr)
+    double gamma1 = alpha1-180+r1;
+    light.line().setP2(p_in);
+    Light refract_in_ball = new Light;
+                //需要添加一下这条光线
+    refract_in_ball.line().setP1(p_in);
+    refract_in_ball.line().setAngle(gamma1);
+    QPointF p_out;
+    p_out.setX(intersect_point(refract_in_ball).x());//好像不成
+    p_out.setY(intersect_point(refract_in_ball).y());
+    QLineF normal2;
+    normal2.setP1(Ball.center);
+    normal2.setP2(p_out);
+    double alpha2 = normal2.angle();
+    double beta2 = refract_in_ball.line().angle();
+    double i2 = beta2-alpha2;//之后还要模一下？分类讨论？暂时搁置
+    double sinr2 = qSin(i2)/Ball.n;//必定能出射吧
+    double r2 ;//=arcsin(sinr)
+    double gamma2 = alpha2-180+r2;
+    refract_in_ball.line().setP2(p_out);
+    Light refract_out = new Light;
+                //需要添加一下
+    refract_out.line().setP1(p_out);
+    refract_out.line().setAngle(gamma2);
+    scene()->addItem(refract_in_ball);
+    scene()->addItem(refract_out);
+}
+
 //判断出屏幕
 bool Ball::out_of_scene(){
     if(x()+pixmap().width()<0 ||x()>scene()->width()
