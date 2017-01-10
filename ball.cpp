@@ -41,7 +41,7 @@ QPointF Ball::intersect_point(Light light){
     double y1 = light.line().p1().y();
     double y2 = light.line().p2().y();
     if(x1=x2) return 0;//以后再写
-    else
+    else{
         double k = (y1-y2)/(x1-x2);
         double r = Ball.radius;
         double A = (k*k+1);
@@ -50,7 +50,7 @@ QPointF Ball::intersect_point(Light light){
         double delta = B*B-4*A*C;
 
         if(delta<=0) return -1;
-        else
+        else{
             double x3 = (-B+sqrt(delta))/(2*A);
             double x4 = (-B+sqrt(delta))/(2*A);
             double xi;
@@ -61,6 +61,8 @@ QPointF Ball::intersect_point(Light light){
             intersect_point.setX(xi);
             intersect_point.setY(yi);
             return intersect_point;
+        }
+    }
 }
 
 void Ball::refract(Light light){
