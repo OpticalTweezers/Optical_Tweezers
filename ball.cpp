@@ -41,7 +41,9 @@ QPointF Ball::intersect_point(Light light){
     double x2 = light.line().p2().x();
     double y1 = light.line().p1().y();
     double y2 = light.line().p2().y();
+
     if(x1==x2) return non_point;//以后再写
+
     else{
         double k = (y1-y2)/(x1-x2);
         double r = this->radius;
@@ -50,7 +52,9 @@ QPointF Ball::intersect_point(Light light){
         double C = y1*y1+y0*y0+x0*x0+k*k*x1*x1-2*k*y1*x1+2*k*y0*x1-2*y1*y0-radius*radius;
         double delta = B*B-4*A*C;
 
+
         if(delta<=0) return non_point;
+
         else{
             double x3 = (-B+sqrt(delta))/(2*A);
             double x4 = (-B+sqrt(delta))/(2*A);
@@ -62,8 +66,11 @@ QPointF Ball::intersect_point(Light light){
             intersect_point.setX(xi);
             intersect_point.setY(yi);
             return intersect_point;
+
             }
        }
+
+
 }
 void Ball::refract(Light light){
     QPointF p_in;
@@ -98,6 +105,7 @@ void Ball::refract(Light light){
                 //需要添加一下
     scene()->addItem(refract_in_ball);
     scene()->addItem(refract_out);
+    double force_angle = (light.line().angle()-refract_out.line().angle())/2+180;
 }
 
 //判断出屏幕
