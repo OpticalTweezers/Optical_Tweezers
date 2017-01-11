@@ -1,12 +1,14 @@
 #include "light.h"
 #include "game.h"
 #include <qmath.h>
+#include <QDebug>
 extern Game*game;
 Light::Light(QPointF p, double angle){
     this->line().setAngle(angle);
     this->line().setP1(p);
     this->line().setLength(2500);
-    this->reset_point_at_screen();
+    //this->reset_point_at_screen();
+
 }
 Light::Light(Light &light){
 }
@@ -34,10 +36,12 @@ QPointF Light::intersect_point(QLineF ln){
 
 //求出光线与屏幕的交点
 QPointF Light::intersect_screen(){
+    qDebug()<<"sb";
     QLineF up(0,0,scene()->width(),0);
     QLineF down(0,scene()->height(),scene()->width(),scene()->height());
     QLineF left(0,0,0,scene()->height());
     QLineF right(scene()->width(),0,scene()->width(),scene()->height());
+    qDebug()<<"this->line().intersect(down,nullptr)";
     if(this->line().intersect(up,nullptr)==2) return intersect_point(up);
     else if(this->line().intersect(down,nullptr)==2) return intersect_point(down);
     else if(this->line().intersect(left,nullptr)==2) return intersect_point(left);
@@ -50,10 +54,11 @@ void Light::reset_point_at_screen(){
     this->line().setP2(intersect_screen());
 }
 
+
 //光线与平面镜的反射
 void Light::reflect(QLineF l){
     Light light(QPointF(0,0),0);
-    if(this->line().intersect(l,nullptr)!=1) return -1;  //If the class definition declares a move constructor or move assignment operator,
+    if(this->line().intersect(l,nullptr)!=1) return ;  //If the class definition declares a move constructor or move assignment operator,
                                                             //the implicitly declared copy constructor is defined as deleted
     else {
         QPointF p=intersect_point(l);
