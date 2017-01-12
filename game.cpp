@@ -1,4 +1,5 @@
 #include <Game.h>
+#include <QDebug>
 Game::Game(){
     //create a scene
     scene =new QGraphicsScene();
@@ -7,7 +8,7 @@ Game::Game(){
     scene->setSceneRect(0,0,800,600);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
+    qDebug()<<scene->height();
     //add Ball
     ball=new Ball();
     scene->addItem(ball);
@@ -17,7 +18,8 @@ Game::Game(){
     //add laserGenerator
     laserGenerator=new LaserGenerator();
     scene->addItem(laserGenerator);
-    laserGenerator->setFocus();
+    laserGenerator->setFlag(QGraphicsItem::ItemIsFocusable);
+    laserGenerator->setFocus();  //继续debug
 }
 
 

@@ -3,7 +3,7 @@
 #include <game.h>
 #include <QTimer>
 #include <QDebug>
-
+Game*game;
 Loading::Loading(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Loading)
@@ -27,6 +27,7 @@ void Loading::progressing_change(){
         this->close();
         game=new Game();
         game->show();
+        qDebug()<<game->scene->width();
         timer->stop();
     }
 }
