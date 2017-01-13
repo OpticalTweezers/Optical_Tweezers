@@ -2,7 +2,17 @@
     <qresource prefix="/images">
         <file>Ball.png</file>
         <file>background.jpeg</file>
-        <file>mirrow.jpg</file>
         <file>laser_generator.jpg</file>
+
+        <file>laser_generator_1.png</file>
+        <file>laser_generator_2.png</file>
+        <file>bg.jpg</file>
+        <file>mirror.jpg</file>
+        <file>win_zone.png</file>
+    </qresource>
+    <qresource prefix="/music">
+        <file>game_bgm.mp3</file>
+        <file>generate.wav</file>
+        <file>mainwindow_bgm.mp3</file>
     </qresource>
 </RCC>

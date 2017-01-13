@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui \
+         multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +28,11 @@ SOURCES += main.cpp \
     Convex_Lens.cpp \
     Concave_Lens.cpp \
     Wall.cpp \
-    Biprism.cpp
+    Biprism.cpp\
+    Win_dialog.cpp \
+    Fail_dialog.cpp
+
+
 
 HEADERS  += \
     Game.h \
@@ -44,11 +49,17 @@ HEADERS  += \
     Convex_Lens.h \
     Concave_Lens.h \
     Wall.h \
-    Biprism.h
+    Biprism.h\
+    Win_dialog.h \
+    Fail_dialog.h
+
+
 
 FORMS    += mainwindow.ui \
     loading.ui \
-    settings.ui
+    settings.ui \
+    Win_dialog.ui \
+    Fail_dialog.ui
 
 RESOURCES += \
     res.qrc
