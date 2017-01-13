@@ -23,8 +23,15 @@ SOURCES += main.cpp \
     Mainwindow.cpp \
     Settings.cpp \
     Win_Zone.cpp \
+    Convex_Mirror.cpp \
+    Concave_Mirror.cpp \
+    Convex_Lens.cpp \
+    Concave_Lens.cpp \
+    Wall.cpp \
+    Biprism.cpp\
     Win_dialog.cpp \
     Fail_dialog.cpp
+
 
 
 HEADERS  += \
@@ -37,8 +44,15 @@ HEADERS  += \
     Mainwindow.h \
     Loading.h \
     Win_Zone.h \
+    Convex_Mirror.h \
+    Concave_Mirror.h \
+    Convex_Lens.h \
+    Concave_Lens.h \
+    Wall.h \
+    Biprism.h\
     Win_dialog.h \
     Fail_dialog.h
+
 
 
 FORMS    += mainwindow.ui \

@@ -24,6 +24,7 @@ private:
     QVector2D acceleration;
     const double radius = 35.5;
     const double n = 1.5;
+    const double force_constant = 1;
     QPointF center;
     Fail_dialog *fail_dialog;
 //protected:

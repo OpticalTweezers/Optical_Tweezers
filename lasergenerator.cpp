@@ -13,6 +13,11 @@ LaserGenerator::LaserGenerator(){
     lasersound->setMedia(QUrl("qrc:/music/generate.wav"));
 }
 
+void LaserGenerator::set_range(double left, double right){
+    this->left_range=left;
+    this->right_range=right;
+}
+
 void LaserGenerator::keyPressEvent(QKeyEvent *event){
 
     //空格键发射激光
@@ -38,12 +43,16 @@ void LaserGenerator::keyPressEvent(QKeyEvent *event){
 
     //左右方向键改变激光发射器的角度
     else if(event->key()==Qt::Key_Left){
-        laser_angle+=0.5;
-        this->setRotation(laser_angle);
+        if(this->laser_angle>=left_range){
+            laser_angle+=2.5;
+            this->setRotation(2.5);
+        }
     }
     else if(event->key()==Qt::Key_Right){
-        laser_angle-=0.5;
-        this->setRotation(laser_angle);
+        if(this->laser_angle<=right_range){
+            laser_angle-=2.5;
+            this->setRotation(-2.5);
+        }
     }
 
 }
