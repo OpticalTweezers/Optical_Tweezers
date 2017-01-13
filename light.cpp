@@ -26,7 +26,9 @@ Light::Light(QPointF p1,QPointF p2){
     this->intensity=1;
 }
 */
+Light::Light(Light& lt){
 
+}
 //求光线与固定线段的交点
 
 QPointF Light::intersect_point(QLineF ln){
@@ -200,19 +202,19 @@ double Light::refract_angle(QLineF l){
 }
 
 double Light::refract_angle_light(QLineF l){
-        double non_degree=999
+        double non_degree=999;
     //以下代码与上上个函数基本相同，只不过要返回出射光线的角度，以便双棱镜处使用
-    if(this->line().intersect(l,nullptr)==1){
-        QPointF p0 = this->intersect_point(l);
-        this->line().setP2(p0);
-        double alpha = this->line().angle();
-        double beta0 = l.angle();
-        double beta;
-        QLineF *tmp = new QLineF;
-        tmp->setAngle(alpha-beta0);
+        if(this->line().intersect(l,nullptr)==1){
+            QPointF p0 = this->intersect_point(l);
+            this->line().setP2(p0);
+            double alpha = this->line().angle();
+            double beta0 = l.angle();
+            double beta;
+            QLineF *tmp = new QLineF;
+            tmp->setAngle(alpha-beta0);
 
-        //只有光线从有向线段的右侧入射才向下执行
-        if((tmp->angle()<180 && tmp->angle()>0)){
+            //只有光线从有向线段的右侧入射才向下执行
+            if((tmp->angle()<180 && tmp->angle()>0)){
             beta = beta0 + 90;
         }
         else return non_degree;

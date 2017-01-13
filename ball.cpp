@@ -10,17 +10,12 @@ extern Game *game;
 Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/Ball.png"));
     setPos(400,300);
-<<<<<<< HEAD
     center.setX(this->pos().x()+radius);
     center.setY(this->pos().y()+radius);
     //initialazation of moving
-=======
-  
-    this->center.setX(this->pos().x()+radius);
-    this->center.setY(this->pos().y()+radius);
 
     //initialazation
->>>>>>> OpticalTweezers/master
+
     velocity.setX(10);
     velocity.setY(0);
 
@@ -121,14 +116,14 @@ void Ball::refract(Light light){
     double r1 = qAsin(sinr1);   //arcsin函数
     double gamma1 = alpha1-180+r1;
     light.line().setP2(p_in);
-    Light *refract_in_ball = new Light(p_in, gamma1);
+    Light refract_in_ball(p_in, gamma1);
     QPointF p_out = intersect_point(refract_in_ball);
 
     QLineF normal2;
     normal2.setP1(this->center);
     normal2.setP2(p_out);
     double alpha2 = normal2.angle();
-    double beta2 = refract_in_ball->line().angle();
+    double beta2 = refract_in_ball.line().angle();
 
   
     double i2 = 180-(beta2-alpha2);
@@ -141,16 +136,16 @@ void Ball::refract(Light light){
     else{
         double r2 = qAsin(sinr2);
         double gamma2 = alpha2-180+r2;
-        refract_in_ball->line().setP2(p_out);
+        refract_in_ball.line().setP2(p_out);
         Light *refract_out = new Light(p_out,gamma2);
 
-        scene()->addItem(refract_in_ball);
+        scene()->addItem(&refract_in_ball);
         scene()->addItem(refract_out);
         double force_angle = (light.line().angle()
                               -refract_out->line().angle())/2+180;
         double force = force_angle * force_constant;
     }
-
+}
 //判断出屏幕
 bool Ball::out_of_scene(){
     if(x()+pixmap().width()<0 ||x()>scene()->width()

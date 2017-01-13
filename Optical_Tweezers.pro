@@ -30,7 +30,18 @@ SOURCES += main.cpp \
     Wall.cpp \
     Biprism.cpp\
     Win_dialog.cpp \
-    Fail_dialog.cpp
+    Fail_dialog.cpp \
+    game2.cpp \
+    game3.cpp \
+    game4.cpp \
+    game5.cpp \
+    game6.cpp \
+    game7.cpp \
+    game8.cpp \
+    game9.cpp \
+    game10.cpp \
+    game11.cpp \
+    game12.cpp
 
 
 
@@ -51,7 +62,18 @@ HEADERS  += \
     Wall.h \
     Biprism.h\
     Win_dialog.h \
-    Fail_dialog.h
+    Fail_dialog.h \
+    game2.h \
+    game3.h \
+    game4.h \
+    game5.h \
+    game6.h \
+    game7.h \
+    game8.h \
+    game9.h \
+    game10.h \
+    game11.h \
+    game12.h
 
 
 
