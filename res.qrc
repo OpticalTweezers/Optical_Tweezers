@@ -2,7 +2,8 @@
     <qresource prefix="/images">
         <file>Ball.png</file>
         <file>background.jpeg</file>
-        <file>mirrow.jpg</file>
         <file>laser_generator.jpg</file>
+        <file>mirror.jpg</file>
+        <file>win_zone.png</file>
     </qresource>
 </RCC>

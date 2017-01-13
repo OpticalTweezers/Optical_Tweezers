@@ -3,6 +3,8 @@
 #include <Ball.h>
 #include <light.h>
 #include <lasergenerator.h>
+#include <Mirror.h>
+#include <win_zone.h>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QBrush>
@@ -15,6 +17,8 @@ public:
 private:
     Ball *ball;
     LaserGenerator *laserGenerator;
+    Mirror *mirror;
+    Win_Zone *win_zone;
 };
 
 #endif // GAME_H
