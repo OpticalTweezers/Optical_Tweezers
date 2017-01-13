@@ -29,18 +29,18 @@
    <widget class="QLabel" name="PhysicsGame">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>40</y>
+      <x>60</x>
+      <y>60</y>
       <width>451</width>
       <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Magneto</family>
-      <pointsize>23</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <family>FZQiTi-S14S</family>
+      <pointsize>63</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="text">
@@ -51,7 +51,7 @@
     <property name="geometry">
      <rect>
       <x>-20</x>
-      <y>-140</y>
+      <y>-150</y>
       <width>1231</width>
       <height>921</height>
      </rect>
@@ -60,7 +60,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/mainwindow/mainwindow.jpg</pixmap>
+     <pixmap resource="res.qrc">:/images/bg.jpg</pixmap>
     </property>
    </widget>
    <widget class="QPushButton" name="StartGame">
@@ -179,6 +179,8 @@ border: none</string>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

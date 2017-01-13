@@ -2,11 +2,22 @@
 #include "game.h"
 #include <qmath.h>
 #include <QDebug>
+#include <QPen>
 extern Game*game;
 Light::Light(QPointF p, double angle){
-    this->line().setAngle(angle);
-    this->line().setP1(p);
-    this->line().setLength(2500);
+    QLineF line1;
+    line1.setAngle(angle);
+    line1.setP1(p);
+    line1.setLength(2500);
+    this->setLine(line1);
+    qDebug()<<this->line().p1().x();
+    qDebug()<<this->line().isNull();
+    //this->line().setP2(QPointF(500,500));
+    QPen pen;
+    pen.setColor(Qt::red);
+    pen.setWidth(10);
+    this->setPen(pen);
+
     //this->reset_point_at_screen();
 
 }

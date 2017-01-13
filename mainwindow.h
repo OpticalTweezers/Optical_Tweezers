@@ -5,6 +5,7 @@
 #include "Settings.h"
 #include "Loading.h"
 #include "game.h"
+#include <QMediaPlayer>
 
 namespace Ui {
 class MainWindow;
@@ -27,6 +28,7 @@ private:
     Ui::MainWindow *ui;
     Settings *settings;
     Loading *loading;
+    QMediaPlayer * bgm;
 };
 
 #endif // MAINWINDOW_H

@@ -4,5 +4,13 @@
         <file>background.jpeg</file>
         <file>mirrow.jpg</file>
         <file>laser_generator.jpg</file>
+        <file>laser_generator_1.png</file>
+        <file>laser_generator_2.png</file>
+        <file>bg.jpg</file>
+    </qresource>
+    <qresource prefix="/music">
+        <file>game_bgm.mp3</file>
+        <file>generate.wav</file>
+        <file>mainwindow_bgm.mp3</file>
     </qresource>
 </RCC>
