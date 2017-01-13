@@ -20,6 +20,7 @@ void Mirror::reflect_light(Light light){
 }
 
 void Mirror::rotate(double rotate_angle){
+
     this->setRotation(rotate_angle);
     QLineF line1 = QLineF(mid_point,mid_line.p1());
     line1.setAngle(line1.angle()+rotate_angle);

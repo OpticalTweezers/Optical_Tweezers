@@ -25,6 +25,7 @@ private:
     QVector2D force=QVector2D(0,2);
     const double radius = 35.5;
     const double n = 1.5;
+    const double force_constant = 1;
     QPointF center;
     Fail_dialog *fail_dialog;
     //小球运动受力

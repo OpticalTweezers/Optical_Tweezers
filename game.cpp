@@ -1,5 +1,8 @@
 #include <Game.h>
+#include <light.h>
+#include <QPen>
 #include <QDebug>
+#include <QMediaPlayer>
 Game::Game(){
     //create a scene
     scene =new QGraphicsScene();
@@ -21,6 +24,13 @@ Game::Game(){
     laserGenerator->setFlag(QGraphicsItem::ItemIsFocusable);
     laserGenerator->setFocus();  //继续debug
 
+
+
+    //background music
+    QMediaPlayer * music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/music/game_bgm.mp3"));
+    music->play();
+
     //add mirror
     mirror =new Mirror(QLineF(QPointF(500,400),QPointF(600,500)));
     scene->addItem(mirror);
@@ -28,6 +38,8 @@ Game::Game(){
     //add win_zone
     win_zone =new Win_Zone();
     scene->addItem(win_zone);
+
 }
+
 
 

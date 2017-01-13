@@ -21,12 +21,11 @@ void Win_Zone::detect_ball(){
     for (int i=0;i<colliding_Items.size();i++){
         Ball *ball_in_zone =dynamic_cast<Ball *>(colliding_Items[i]);
         if(ball_in_zone){
-            qDebug()<<"wushizuichou";
+            //qDebug()<<"win_dialog_show";
             win_dialog=new Win_dialog();
             win_dialog->show();
             timer->stop();
         }
     }
 }
-
 
