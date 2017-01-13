@@ -32,6 +32,11 @@ void Loading::progressing_change(){
     }
 }
 
+void Loading::on_pushButton_clicked()
+{
+
+}
+
 
 
 

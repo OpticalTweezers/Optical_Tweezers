@@ -4,12 +4,15 @@
 
 #include <QMouseEvent>
 
+#include <QMediaPlayer>
+
 class LaserGenerator : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
 public:
     LaserGenerator();
 private:
     double laser_angle;
+    QMediaPlayer * lasersound;
 public slots:
     void keyPressEvent(QKeyEvent *event);
 

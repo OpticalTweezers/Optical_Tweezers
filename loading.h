@@ -18,6 +18,8 @@ public:
     Game*game;
 private slots:
     void progressing_change();
+    void on_pushButton_clicked();
+
 private:
     Ui::Loading *ui;
     int progressing=0;

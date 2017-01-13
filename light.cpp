@@ -2,6 +2,7 @@
 #include "game.h"
 #include <qmath.h>
 #include <QDebug>
+#include <QPen>
 extern Game*game;
 Light::Light(QPointF p, double angle){
     QLineF line_of_light;

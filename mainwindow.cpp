@@ -3,6 +3,7 @@
 #include "Settings.h"
 #include "Loading.h"
 #include <QDebug>
+#include <QMediaPlayer>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->PhysicsGame->setStyleSheet("color:red");
+    bgm = new QMediaPlayer();
+    bgm->setMedia(QUrl("qrc:/music/mainwindow_bgm.mp3"));
+    bgm->play();
 }
 
 MainWindow::~MainWindow(){

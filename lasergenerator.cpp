@@ -2,22 +2,38 @@
 #include "game.h"
 #include "light.h"
 #include <QDebug>
+#include <QMediaPlayer>
 extern Game*game;
 LaserGenerator::LaserGenerator(){
-    setPixmap(QPixmap(":/images/laser_generator.jpg"));
+    setPixmap(QPixmap(":/images/laser_generator_2.png"));
     setPos(0,0);
     this->setTransformOriginPoint(70,70);
     laser_angle=0;
+    lasersound = new QMediaPlayer();
+    lasersound->setMedia(QUrl("qrc:/music/generate.wav"));
 }
 
 void LaserGenerator::keyPressEvent(QKeyEvent *event){
 
     //空格键发射激光
     if(event->key()==Qt::Key_Space){
+        Light *light=new Light(QPoint(x()+5,y()),this->laser_angle);
+
         //game->lights.append(new Light(QPoint(x()+5,y()),this->laser_angle));
-        qDebug()<<"wushibinzuichou";
-        scene()->addItem(new Light(QPoint(x()+40,y()+40),this->laser_angle));
-        //scene()->addItem(game->lights[0]);
+        //game->lights.append(light);
+        //qDebug()<<(game->lights);
+
+        scene()->addItem(light);
+        //qDebug()<<"wushibinzuichou123";
+
+        //play lasersound
+        if(lasersound->state() == QMediaPlayer::PlayingState){
+            lasersound->setPosition(0);
+        }
+        else if(lasersound->state() == QMediaPlayer::StoppedState){
+            lasersound->play();
+        }
+
     }
 
     //左右方向键改变激光发射器的角度
