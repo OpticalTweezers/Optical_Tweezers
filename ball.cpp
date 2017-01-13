@@ -10,26 +10,37 @@ extern Game *game;
 Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     setPixmap(QPixmap(":/images/Ball.png"));
     setPos(400,300);
-  
-    this->center.setX(this->pos().x()+radius);
-    this->center.setY(this->pos().y()+radius);
+    center.setX(this->pos().x()+radius);
+    center.setY(this->pos().y()+radius);
+    //initialazation of moving
 
     //initialazation
+
     velocity.setX(10);
-    velocity.setY(10);
+    velocity.setY(0);
+
     acceleration.setX(0);
     acceleration.setY(0);
+    forces.append(QVector2D(0,2));
+    double forceX;
+    double forceY;
+    for(int i=0;i<forces.size();i++){
+        forceX+=forces[i].x();
+    }
+    for(int i=0;i<forces.size();i++){
+        forceY+=forces[i].y();
+    }
+    force.setX(forceX);
+    force.setY(forceY);
 
-    QVector2D F(0,10);
+    QTimer *timer =new QTimer();
 
-    QTimer *timer_a =new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(v_change()));
+    timer->start(100);
 
-    connect(timer_a,SIGNAL(timeout()),this,SLOT(v_change(F)));
-    timer_a->start(100);
 
-    QTimer *timer_v =new QTimer();
-    connect(timer_v,SIGNAL(timeout()),this,SLOT(move()));
-    timer_v->start(100);
+    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    timer->start(100);
 }
 
 //球折射光线
@@ -105,14 +116,15 @@ void Ball::refract(Light light){
     double r1 = qAsin(sinr1);   //arcsin函数
     double gamma1 = alpha1-180+r1;
     light.line().setP2(p_in);
-    Light *refract_in_ball = new Light(p_in, gamma1);
+    Light refract_in_ball(p_in, gamma1);
     QPointF p_out = intersect_point(refract_in_ball);
 
     QLineF normal2;
     normal2.setP1(this->center);
     normal2.setP2(p_out);
     double alpha2 = normal2.angle();
-    double beta2 = refract_in_ball->line().angle();
+    double beta2 = refract_in_ball.line().angle();
+
   
     double i2 = 180-(beta2-alpha2);
     double sinr2 = qSin(i2)*n;
@@ -124,17 +136,16 @@ void Ball::refract(Light light){
     else{
         double r2 = qAsin(sinr2);
         double gamma2 = alpha2-180+r2;
-        refract_in_ball->line().setP2(p_out);
+        refract_in_ball.line().setP2(p_out);
         Light *refract_out = new Light(p_out,gamma2);
 
-        scene()->addItem(refract_in_ball);
+        scene()->addItem(&refract_in_ball);
         scene()->addItem(refract_out);
         double force_angle = (light.line().angle()
                               -refract_out->line().angle())/2+180;
         double force = force_angle * force_constant;
     }
 }
-
 //判断出屏幕
 bool Ball::out_of_scene(){
     if(x()+pixmap().width()<0 ||x()>scene()->width()
@@ -159,7 +170,7 @@ void Ball::move(){
 }
 
 //ball受力改变velocity
-void Ball::v_change(QVector2D force){
+void Ball::v_change(){
     velocity.setX(velocity.x()+force.x());
     velocity.setY(velocity.y()+force.y());
     qDebug()<<velocity.x();

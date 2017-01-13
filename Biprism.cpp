@@ -29,7 +29,7 @@ void Biprism::refract_out_BA(Light light){
 
 void Biprism::refract_out_AC(Light light){
     if(light.intersect_point(this->lineAC)==QPointF(-1,-1)) return;
-    else if(light.refract_angle(this->lineAC==9)) return;
+    else if(light.refract_angle(this->lineAC)==9) return;
     else{
         QPointF p0 = light.intersect_point(this->lineAC);
         QLineF tmp = QLineF(p0,pC);
