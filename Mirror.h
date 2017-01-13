@@ -8,12 +8,14 @@
 
 class Mirror : public QGraphicsPixmapItem{
 public:
-    Mirror(QPointF p, QLineF l);
+    Mirror(QLineF l);
     Light detect_light();
     void reflect_light(Light light);
 private:
     QPointF mid_point;
     QLineF mid_line;
+public slots:
+    void rotate(double rotate_angle);
 };
 
 #endif // MIRROR_H

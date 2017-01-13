@@ -22,7 +22,10 @@ SOURCES += main.cpp \
     Loading.cpp \
     Mainwindow.cpp \
     Settings.cpp \
-    Win_Zone.cpp
+    Win_Zone.cpp \
+    Win_dialog.cpp \
+    Fail_dialog.cpp
+
 
 HEADERS  += \
     Game.h \
@@ -33,11 +36,16 @@ HEADERS  += \
     Settings.h \
     Mainwindow.h \
     Loading.h \
-    Win_Zone.h
+    Win_Zone.h \
+    Win_dialog.h \
+    Fail_dialog.h
+
 
 FORMS    += mainwindow.ui \
     loading.ui \
-    settings.ui
+    settings.ui \
+    Win_dialog.ui \
+    Fail_dialog.ui
 
 RESOURCES += \
     res.qrc

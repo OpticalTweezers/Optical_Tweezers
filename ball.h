@@ -8,6 +8,7 @@
 #include <QPointF>
 #include <QVector2D>
 #include "Light.h"
+#include "Fail_dialog.h"
 class Ball:public QObject,public QGraphicsPixmapItem{    //bad inherited error
     Q_OBJECT
 public:
@@ -24,6 +25,7 @@ private:
     const double radius = 35.5;
     const double n = 1.5;
     QPointF center;
+    Fail_dialog *fail_dialog;
 //protected:
     //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };

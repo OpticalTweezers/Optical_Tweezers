@@ -118,17 +118,17 @@ bool Ball::out_of_scene(){
 }
 //ball运动
 void Ball::move(){
-
     if(out_of_scene()){
         scene()->removeItem(this);
         delete this;
+        fail_dialog =new Fail_dialog();
+        fail_dialog->show();
         qDebug()<<"gameover";
         return;
     }
     double dx=velocity.x();
     double dy=velocity.y();
     setPos(x()+dx,y()+dy);
-    //qDebug()<<3;
 }
 
 //ball受力改变velocity

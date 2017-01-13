@@ -24,19 +24,21 @@ Game::Game(){
     laserGenerator->setFlag(QGraphicsItem::ItemIsFocusable);
     laserGenerator->setFocus();  //继续debug
 
-    //light
-    Light *light=new Light(QPoint(700,700),45);
-    //QGraphicsLineItem *lineitem=new QGraphicsLineItem(QLineF(QPoint(500,500),QPoint(600,600)));
-    QPen pen;
-    pen.setColor(Qt::red);
-    pen.setWidth(10);
-    light->setPen(pen);
-    scene->addItem(light);
+
 
     //background music
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl("qrc:/music/game_bgm.mp3"));
     music->play();
+
+    //add mirror
+    mirror =new Mirror(QLineF(QPointF(500,400),QPointF(600,500)));
+    scene->addItem(mirror);
+
+    //add win_zone
+    win_zone =new Win_Zone();
+    scene->addItem(win_zone);
+
 }
 
 
