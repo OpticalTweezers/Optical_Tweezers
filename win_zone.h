@@ -7,7 +7,6 @@
 class Win_Zone : public QGraphicsPixmapItem {
 public:
     Win_Zone(QPointF center, double width, double height);
-    void detect_light();
 
 };
 

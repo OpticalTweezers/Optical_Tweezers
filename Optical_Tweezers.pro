@@ -21,7 +21,13 @@ SOURCES += main.cpp \
     Loading.cpp \
     Mainwindow.cpp \
     Settings.cpp \
-    Win_Zone.cpp
+    Win_Zone.cpp \
+    Convex_Mirror.cpp \
+    Concave_Mirror.cpp \
+    Convex_Lens.cpp \
+    Concave_Lens.cpp \
+    Wall.cpp \
+    Biprism.cpp
 
 HEADERS  += \
     Game.h \
@@ -32,7 +38,13 @@ HEADERS  += \
     Settings.h \
     Mainwindow.h \
     Loading.h \
-    Win_Zone.h
+    Win_Zone.h \
+    Convex_Mirror.h \
+    Concave_Mirror.h \
+    Convex_Lens.h \
+    Concave_Lens.h \
+    Wall.h \
+    Biprism.h
 
 FORMS    += mainwindow.ui \
     loading.ui \

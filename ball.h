@@ -12,7 +12,7 @@ class Ball:public QObject,public QGraphicsPixmapItem{    //bad inherited error
     Q_OBJECT
 public:
     Ball(QGraphicsItem * parent=0);
-    QPointF Ball::intersect_point(Light light);
+    QPointF intersect_point(Light light);
     void refract(Light light);
 public slots:
     void move();                 //ball移动
@@ -23,6 +23,7 @@ private:
     QVector2D acceleration;
     const double radius = 35.5;
     const double n = 1.5;
+    const double force_constant = 1;
     QPointF center;
 //protected:
     //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

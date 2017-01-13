@@ -7,11 +7,17 @@ Light::Light(QPointF p, double angle){
     this->line().setP1(p);
     this->line().setLength(2500);
     this->reset_point_at_screen();
+    this->intensity=1;
 }
-Light::Light(Light &light){
+/*
+Light::Light(QPointF p1,QPointF p2){
+    this->line().setP1();
+    this->line().setP2();
+    this->line().setLength(2500);//不知道可不可以？
+    this->reset_point_at_screen();;
+    this->intensity=1;
 }
-
-
+*/
 
 //求光线与固定线段的交点
 
@@ -23,12 +29,14 @@ QPointF Light::intersect_point(QLineF ln){
     double alpha=this->line().angle();
     double beta=ln.angle();
     if(this->line().intersect(ln,nullptr)){          //nullptr
-    if(qTan(beta)!=qTan(alpha)){
-        double x = y1-y0+x1*qTan(beta)-x0*qTan(alpha)/(qTan(beta)-qTan(alpha));
-        double y = y0-qTan(alpha)*(x-x0);
-        return QPoint(x,y);
-    }
-    else return QPointF(-1,-1);
+        if(alpha==90 || alpha==270) ;
+        else if(beta==90 || beta==270) ;
+        else if(qTan(beta)!=qTan(alpha)){
+            double x = y1-y0+x1*qTan(beta)-x0*qTan(alpha)/(qTan(beta)-qTan(alpha));
+            double y = y0-qTan(alpha)*(x-x0);
+            return QPointF(x,y);
+        }
+        else return nullptr;
     }
 }
 
@@ -67,4 +75,121 @@ void Light::reflect(QLineF l){
     }
 }
 
+//设置光强
+void Light::set_intensity(double i){
+    this->intensity=i;
+}
+
+void Light::simple_refract_in(QLineF l){
+     if(this->line().intersect(l,nullptr)==1){
+        QPointF p0 = this->intersect_point(l);
+        this->line().setP2(p0);
+        double alpha = this->line().angle();
+        double beta0 = l.angle();
+        double beta;
+        QLineF *tmp = new QLineF;
+        tmp->setAngle(alpha-beta0);
+
+        //只有光线从有向线段的左侧入射才向下执行
+        if((tmp->angle()>180 && tmp->angle()<360)){
+            beta = beta0 - 90;
+        }
+        else return;
+
+        double i = beta - alpha;
+        double sinr = qSin(i)/n;
+        double r = qAsin(sinr);
+
+        double gamma = beta + r;
+        Light *refract_in = new Light(p0,gamma);
+    }
+}
+
+void Light::simple_refract_out(QLineF l){
+    if(this->line().intersect(l,nullptr)==1){
+        QPointF p0 = this->intersect_point(l);
+        this->line().setP2(p0);
+        double alpha = this->line().angle();
+        double beta0 = l.angle();
+        double beta;
+        QLineF *tmp = new QLineF;
+        tmp->setAngle(alpha-beta0);
+
+        //只有光线从有向线段的右侧入射才向下执行
+        if((tmp->angle()<180 && tmp->angle()>0)){
+            beta = beta0 + 90;
+        }
+        else return;
+
+        double i = beta - alpha;
+        double sinr = qSin(i)*n;
+
+        //全反射判断
+        if(sinr>=1) return;
+        else{
+            double r = qAsin(sinr);
+            double gamma = beta - r;
+            Light *refract_out = new Light(p0,gamma);
+        }
+    }
+}
+
+double Light::refract_angle(QLineF l){
+    //以下代码与上个函数基本相同，只不过要返回出射角，以便双棱镜处使用
+    if(this->line().intersect(l,nullptr)==1){
+        QPointF p0 = this->intersect_point(l);
+        this->line().setP2(p0);
+        double alpha = this->line().angle();
+        double beta0 = l.angle();
+        double beta;
+        QLineF *tmp = new QLineF;
+        tmp->setAngle(alpha-beta0);
+
+        //只有光线从有向线段的右侧入射才向下执行
+        if((tmp->angle()<180 && tmp->angle()>0)){
+            beta = beta0 + 90;
+        }
+        else return 9;
+
+        double i = beta - alpha;
+        double sinr = qSin(i)*n;
+
+        //全反射判断
+        if(sinr>=1) return 9;
+        else{
+            return qAsin(sinr);
+        }
+    }
+    else return 9;
+}
+
+double Light::refract_angle_light(QLineF l){
+    //以下代码与上上个函数基本相同，只不过要返回出射光线的角度，以便双棱镜处使用
+    if(this->line().intersect(l,nullptr)==1){
+        QPointF p0 = this->intersect_point(l);
+        this->line().setP2(p0);
+        double alpha = this->line().angle();
+        double beta0 = l.angle();
+        double beta;
+        QLineF *tmp = new QLineF;
+        tmp->setAngle(alpha-beta0);
+
+        //只有光线从有向线段的右侧入射才向下执行
+        if((tmp->angle()<180 && tmp->angle()>0)){
+            beta = beta0 + 90;
+        }
+        else return 9;
+
+        double i = beta - alpha;
+        double sinr = qSin(i)*n;
+
+        //全反射判断
+        if(sinr>=1) return 9;
+        else{
+            double r = qAsin(sinr);
+            return (beta - r);
+        }
+    }
+    else return 9;
+}
 
