@@ -9,7 +9,7 @@ Loading::Loading(QWidget *parent) :
     ui(new Ui::Loading)
 {
     ui->setupUi(this);
-    ui->progressBar->setRange(0,10);
+    ui->progressBar->setRange(0,1);
     ui->progressBar->setValue(0);
     timer=new QTimer();
     connect(timer,SIGNAL(timeout()),this,SLOT(progressing_change()));
@@ -23,7 +23,7 @@ void Loading::progressing_change(){
     progressing++;
     ui->progressBar->setValue(progressing);
     qDebug()<<progressing;
-    if(progressing==10){
+    if(progressing==1){
         this->close();
         game=new Game();
         game->show();

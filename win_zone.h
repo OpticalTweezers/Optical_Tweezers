@@ -3,12 +3,17 @@
 
 #include <QGraphicsPixmapItem>
 #include <QPointF>
-
-class Win_Zone : public QGraphicsPixmapItem {
+#include <Win_dialog.h>
+#include <QTimer>
+class Win_Zone :public QObject,public QGraphicsPixmapItem {
+    Q_OBJECT
 public:
-    Win_Zone(QPointF center, double width, double height);
-    void detect_light();
-
+    Win_Zone();
+public slots:
+    void detect_ball();
+private:
+    Win_dialog *win_dialog;
+    QTimer *timer;
 };
 
 #endif // WIN_ZONE_H

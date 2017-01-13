@@ -20,6 +20,14 @@ Game::Game(){
     scene->addItem(laserGenerator);
     laserGenerator->setFlag(QGraphicsItem::ItemIsFocusable);
     laserGenerator->setFocus();  //继续debug
+
+    //add mirror
+    mirror =new Mirror(QLineF(QPointF(500,400),QPointF(600,500)));
+    scene->addItem(mirror);
+
+    //add win_zone
+    win_zone =new Win_Zone();
+    scene->addItem(win_zone);
 }
 
 
