@@ -12,22 +12,32 @@ Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
     setPos(400,300);
     center.setX(this->pos().x()+radius);
     center.setY(this->pos().y()+radius);
-    //initialazation
+    //initialazation of moving
     velocity.setX(10);
-    velocity.setY(10);
+    velocity.setY(0);
+
     acceleration.setX(0);
     acceleration.setY(0);
+    forces.append(QVector2D(0,2));
+    double forceX;
+    double forceY;
+    for(int i=0;i<forces.size();i++){
+        forceX+=forces[i].x();
+    }
+    for(int i=0;i<forces.size();i++){
+        forceY+=forces[i].y();
+    }
+    force.setX(forceX);
+    force.setY(forceY);
 
-    QVector2D F(0,10);
+    QTimer *timer =new QTimer();
 
-    QTimer *timer_a =new QTimer();
+    connect(timer,SIGNAL(timeout()),this,SLOT(v_change()));
+    timer->start(100);
 
-    connect(timer_a,SIGNAL(timeout()),this,SLOT(v_change(F)));
-    timer_a->start(100);
 
-    QTimer *timer_v =new QTimer();
-    connect(timer_v,SIGNAL(timeout()),this,SLOT(move()));
-    timer_v->start(100);
+    connect(timer,SIGNAL(timeout()),this,SLOT(move()));
+    timer->start(100);
 }
 
 //球折射光线
@@ -105,7 +115,7 @@ void Ball::refract(Light light){
                 //需要添加一下
     scene()->addItem(refract_in_ball);
     scene()->addItem(refract_out);
-    double force_angle = (light.line().angle()-refract_out.line().angle())/2+180;
+    double force_angle = (light.line().angle()-refract_out->line().angle())/2+180;
 }
 
 //判断出屏幕
@@ -132,7 +142,7 @@ void Ball::move(){
 }
 
 //ball受力改变velocity
-void Ball::v_change(QVector2D force){
+void Ball::v_change(){
     velocity.setX(velocity.x()+force.x());
     velocity.setY(velocity.y()+force.y());
     qDebug()<<velocity.x();

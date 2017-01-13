@@ -17,15 +17,18 @@ public:
     void refract(Light light);
 public slots:
     void move();                 //ball移动
-    void v_change(QVector2D force);         //与move配套
+    void v_change();         //与move配套
 private:
     bool out_of_scene();   //move辅助函数
     QVector2D velocity;
     QVector2D acceleration;
+    QVector2D force=QVector2D(0,2);
     const double radius = 35.5;
     const double n = 1.5;
     QPointF center;
     Fail_dialog *fail_dialog;
+    //小球运动受力
+    QVector<QVector2D>forces;
 //protected:
     //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
