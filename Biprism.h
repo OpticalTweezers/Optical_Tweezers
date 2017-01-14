@@ -10,10 +10,10 @@ public:
     QPointF intersect(Light light);
     void refract_in_BA(Light light);
     void refract_in_AC(Light light);
-    void refract_in_BC(Light light);
+    void refract_in_CB(Light light);
     void refract_out_BA(Light light);
     void refract_out_AC(Light light);
-    void refract_out_BC(Light light);
+    void refract_out_CB(Light light);
     void refract_out_C(Light light);
 private:
     double angle;

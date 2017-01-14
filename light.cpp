@@ -17,6 +17,16 @@ Light::Light(QPointF p, double angle){
     this->reset_point_at_screen();
     this->intensity=1;
 }
+
+Light::Light(Light &lt){
+    QPen pen;
+    pen.setColor(Qt::white);
+    pen.setWidth(2);
+    this->setPen(pen);
+    this->intensity=1;
+    this->setLine(lt.line());
+}
+
 /*
 Light::Light(QPointF p1,QPointF p2){
     this->line().setP1();
@@ -26,9 +36,7 @@ Light::Light(QPointF p1,QPointF p2){
     this->intensity=1;
 }
 */
-Light::Light(Light& lt){
 
-}
 //求光线与固定线段的交点
 
 QPointF Light::intersect_point(QLineF ln){
@@ -229,6 +237,23 @@ double Light::refract_angle_light(QLineF l){
             return (beta - r);
         }
     }
-    else return non_degree;
+        else return non_degree;
+}
+
+
+double Light::get_d(){
+    return d;
+}
+
+double Light::get_intensity(){
+    return intensity;
+}
+
+void Light::write_d(double new_d){
+    d=new_d;
+}
+
+void Light::write_intensity(double new_intensity){
+    intensity=new_intensity;
 }
 

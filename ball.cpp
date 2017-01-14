@@ -16,12 +16,12 @@ Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
 
     //initialazation
 
-    velocity.setX(10);
+    velocity.setX(0);
     velocity.setY(0);
 
     acceleration.setX(0);
     acceleration.setY(0);
-    forces.append(QVector2D(0,2));
+    forces.append(QVector2D(0,0));
     double forceX;
     double forceY;
     for(int i=0;i<forces.size();i++){
@@ -173,7 +173,7 @@ void Ball::move(){
 void Ball::v_change(){
     velocity.setX(velocity.x()+force.x());
     velocity.setY(velocity.y()+force.y());
-    qDebug()<<velocity.x();
+    //qDebug()<<velocity.x();
 }
 
 /*     Non_use

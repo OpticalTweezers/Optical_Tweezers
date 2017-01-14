@@ -23,7 +23,7 @@ Game::Game(){
     scene->addItem(laserGenerator);
     laserGenerator->setFlag(QGraphicsItem::ItemIsFocusable);
     laserGenerator->setFocus();  //继续debug
-
+    laserGenerator->set_range(-3600,3600);
 
 
     //background music
