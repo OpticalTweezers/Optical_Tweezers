@@ -41,5 +41,21 @@ Game::Game(){
 
 }
 
+Ball *Game::get_ball(){
+    return ball;
+}
+
+LaserGenerator *Game::get_lasergenerator(){
+    return laserGenerator;
+}
+
+Mirror *Game::get_mirror(){
+    return mirror;
+}
+
+Win_Zone *Game::get_win_zone(){
+    return win_zone;
+}
+
 
 

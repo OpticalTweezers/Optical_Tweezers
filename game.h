@@ -14,11 +14,16 @@ public:
     Game();
     QGraphicsScene *scene;
     QVector<Light*>lights;
+    //private 函数接口
+    Ball * get_ball();
+    LaserGenerator *get_lasergenerator();
+    Mirror * get_mirror();
+    Win_Zone *get_win_zone();
 private:
-    Ball *ball;
-    LaserGenerator *laserGenerator;
-    Mirror *mirror;
-    Win_Zone *win_zone;
+    Ball *ball=nullptr;
+    LaserGenerator *laserGenerator=nullptr;
+    Mirror *mirror=nullptr;
+    Win_Zone *win_zone=nullptr;
 };
 
 #endif // GAME_H

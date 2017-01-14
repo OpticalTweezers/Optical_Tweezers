@@ -11,6 +11,9 @@ class LaserGenerator : public QObject, public QGraphicsPixmapItem {
 public:
     LaserGenerator();
     void set_range(double left,double right);
+
+    //private接口
+    Light *get_lg_light();
 private:
     double laser_angle;
     double left_range;

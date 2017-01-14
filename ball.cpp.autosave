@@ -41,6 +41,9 @@ Ball::Ball(QGraphicsItem *parent):QObject(),QGraphicsPixmapItem(parent){
 
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
     timer->start(100);
+    
+    connect(timer,SIGNAL(timeout()),this,SLOT();
+    timer->start(100);
 }
 
 //球折射光线

@@ -13,8 +13,9 @@ class Ball:public QObject,public QGraphicsPixmapItem{    //bad inherited error
     Q_OBJECT
 public:
     Ball(QGraphicsItem * parent=0);
-    QPointF intersect_point(Light light);
-    void refract(Light light);
+    QPointF intersect_point(Light *light);
+    void refract(Light *light);
+    bool intersect_with_light();
 public slots:
     void move();                 //ball移动
     void v_change();         //与move配套
@@ -30,6 +31,9 @@ private:
     Fail_dialog *fail_dialog;
     //小球运动受力
     QVector<QVector2D>forces;
+
+    //不合理值定义
+    QPointF non_point=QPointF(-1,-1);
 //protected:
     //void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
