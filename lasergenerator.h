@@ -1,9 +1,9 @@
 #ifndef LASERGENERATOR_H
 #define LASERGENERATOR_H
 #include <QGraphicsPixmapItem>
-
 #include <QMouseEvent>
-
+#include <QKeyEvent>
+#include <light.h>
 #include <QMediaPlayer>
 
 class LaserGenerator : public QObject, public QGraphicsPixmapItem {
@@ -16,8 +16,11 @@ private:
     double left_range;
     double right_range;
     QMediaPlayer * lasersound;
+    Light *light=nullptr;
+    bool mPressFlag_Space=false;
 public slots:
     void keyPressEvent(QKeyEvent *event);
+    //void keyReleaseEvent(QKeyEvent *event);
 };
 
 #endif // LASERGENERATOR_H

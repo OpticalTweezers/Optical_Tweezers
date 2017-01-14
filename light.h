@@ -7,6 +7,7 @@
 class Light : public QGraphicsLineItem{
 public:
     Light(QPointF,double angle);
+    Light(Light& lt);
     //Light(QPointF p1, QPointF p2);
     QPointF intersect_point(QLineF line);
     QPointF intersect_screen();
@@ -17,10 +18,15 @@ public:
     void simple_refract_out(QLineF l);
     double refract_angle(QLineF l);
     double refract_angle_light(QLineF l);
+    double get_d();
+    double get_intensity();
+    void write_d(double new_d);
+    void write_intensity(double new_intensity);
+
+    const double n = 1.5;
 private:
     double intensity;
-    const double n = 1.5;
-    const double d = 0; //预设的光线宽度，双棱镜函数中使用
+    double d = 0; //预设的光线宽度，双棱镜函数中使用
 };
 
 #endif // LIGHT_H

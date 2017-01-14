@@ -6,7 +6,7 @@
 
 class Concave_Mirror : public QGraphicsPixmapItem{
 public:
-    Convex_Mirror(QPointF p, double angle, double radius, double range);
+    Concave_Mirror(QPointF p, double angle, double radius, double range);
     QPointF intersect(Light light);
     void reflect(Light light);
 private:

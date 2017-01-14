@@ -35,7 +35,7 @@ void Biprism::refract_out_AC(Light light){
         QLineF tmp = QLineF(p0,pC);
         double x = tmp.length();
         double theta = light.refract_angle(this->lineAC);
-        double critical = light.d/qCos(theta);
+        double critical = light.get_d()/qCos(theta);
         if(x>=critical){
             light.simple_refract_out(lineAC);
         }
@@ -43,7 +43,7 @@ void Biprism::refract_out_AC(Light light){
 
             //假设一条C方向延长的CB边，以便求出射光线的角度
             QLineF tmpBC = QLineF(pB,pC);
-            tmpCB.setLength(tmpBC.length()+100);
+            tmpBC.setLength(tmpBC.length()+100);
             QPointF pCtmp = tmpBC.p2();
             QLineF tmpCB = QLineF(pCtmp,pB);
             double thetaAC = light.refract_angle_light(lineAC);
@@ -52,10 +52,10 @@ void Biprism::refract_out_AC(Light light){
             Light *outCB = new Light(pC,thetaCB);
 
             //调整光强
-            outAC->intensity = light.intensity* (critical+x)*(critical+x)/
-                    (critical-x)*(critical-x)+(critical+x)*(critical+x);
-            outCB->intensity = light.intensity* (critical-x)*(critical-x)/
-                    (critical-x)*(critical-x)+(critical+x)*(critical+x);
+            outAC->write_intensity(light.get_intensity()* (critical+x)*(critical+x)/
+                    (critical-x)*(critical-x)+(critical+x)*(critical+x));
+            outCB->write_intensity(light.get_intensity()* (critical-x)*(critical-x)/
+                    (critical-x)*(critical-x)+(critical+x)*(critical+x));
         }
     }
 }
@@ -63,13 +63,13 @@ void Biprism::refract_out_AC(Light light){
 
 void Biprism::refract_out_CB(Light light){
     if(light.intersect_point(this->lineAC)==QPointF(-1,-1)) return;
-    else if(light.refract_angle(this->lineAC==9)) return;
+    else if(light.refract_angle(this->lineAC)==9) return;
     else{
         QPointF p0 = light.intersect_point(this->lineAC);
         QLineF tmp = QLineF(p0,pC);
         double x = tmp.length();
         double theta = light.refract_angle(this->lineAC);
-        double critical = light.d/qCos(theta);
+        double critical = light.get_d()/qCos(theta);
         if(x>=critical){
             light.simple_refract_out(lineAC);
         }
@@ -84,10 +84,10 @@ void Biprism::refract_out_CB(Light light){
             Light *outCB = new Light(pC,thetaCB);
 
             //调整光强
-            outAC->intensity = light.intensity* (critical+x)*(critical+x)/
-                    (critical-x)*(critical-x)+(critical+x)*(critical+x);
-            outCB->intensity = light.intensity* (critical-x)*(critical-x)/
-                    (critical-x)*(critical-x)+(critical+x)*(critical+x);
+            outAC->write_intensity(light.get_intensity()* (critical+x)*(critical+x)/
+                    (critical-x)*(critical-x)+(critical+x)*(critical+x));
+            outCB->write_intensity(light.get_intensity()* (critical-x)*(critical-x)/
+                    (critical-x)*(critical-x)+(critical+x)*(critical+x));
         }
     }
 }

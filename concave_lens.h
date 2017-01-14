@@ -6,7 +6,7 @@
 
 class Concave_Lens : public QGraphicsPixmapItem{
 public:
-    Concave_Mirror(QPointF p, double angle, double length, double focal_length);
+    Concave_Lens(QPointF p, double angle, double length, double focal_length);
     QPointF intersect(Light light);
     void refract(Light light);
 private:

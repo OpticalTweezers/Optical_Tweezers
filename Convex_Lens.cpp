@@ -2,7 +2,7 @@
 #include <QtMath>
 
 Convex_Lens::Convex_Lens(QPointF p, double angle, double length, double focal_length){
-    //this->setPixmap(QPixmap(":/images/convex_lens"));
+    this->setPixmap(QPixmap(":/images/convex_lens"));
     this->middle_point=p;
     this->setPos(p.x()-(length/2),p.y());
     this->setTransformOriginPoint(p);

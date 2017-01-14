@@ -1,7 +1,8 @@
 #include <Game2.h>
 #include <QDebug>
 
-Game2::Game2(){
+Game2::Game2():Game(){
+    /*
     //create a scene
     scene =new QGraphicsScene();
     setScene(scene);
@@ -25,5 +26,7 @@ Game2::Game2(){
     //add mirror
     mirror =new Mirror(QLineF(QPointF(500,400),QPointF(600,500)));
     scene->addItem(mirror);
+
+    */
 }
 
