@@ -28,10 +28,10 @@ void Biprism::refract_out_BA(Light light){
 }
 
 void Biprism::refract_out_AC(Light light){
-    if(light.intersect_point(this->lineAC)==QPointF(-1,-1)) return;
+    if(light.intersect_point(this->lineAC)) return;
     else if(light.refract_angle(this->lineAC)==9) return;
     else{
-        QPointF p0 = light.intersect_point(this->lineAC);
+        QPointF p0 = *light.intersect_point(this->lineAC);
         QLineF tmp = QLineF(p0,pC);
         double x = tmp.length();
         double theta = light.refract_angle(this->lineAC);
@@ -62,10 +62,10 @@ void Biprism::refract_out_AC(Light light){
 
 
 void Biprism::refract_out_CB(Light light){
-    if(light.intersect_point(this->lineAC)==QPointF(-1,-1)) return;
+    if(light.intersect_point(this->lineAC)) return;
     else if(light.refract_angle(this->lineAC)==9) return;
     else{
-        QPointF p0 = light.intersect_point(this->lineAC);
+        QPointF p0 = *light.intersect_point(this->lineAC);
         QLineF tmp = QLineF(p0,pC);
         double x = tmp.length();
         double theta = light.refract_angle(this->lineAC);

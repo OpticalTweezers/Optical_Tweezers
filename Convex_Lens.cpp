@@ -21,13 +21,13 @@ Convex_Lens::Convex_Lens(QPointF p, double angle, double length, double focal_le
 }
 
 QPointF Convex_Lens::intersect(Light light){
-    return light.intersect_point(base_line);
+    return *light.intersect_point(base_line);
 }
 
 void Convex_Lens::refract(Light light){
     QPointF p0 = intersect(light);
     Light *tmp = new Light(QPoint(0,0),light.line().angle());
-    QPointF p1 = tmp->intersect_point(focal_line);
+    QPointF p1 = *tmp->intersect_point(focal_line);
     double ang_ref = QLineF(p0,p1).angle();
     Light *refract = new Light(p0,ang_ref);
     light.line().setP2(p0);

@@ -20,8 +20,8 @@ void LaserGenerator::set_range(double left, double right){
 }
 
 Light *LaserGenerator::get_lg_light(){
-    qDebug()<<"2";
-    qDebug()<<light;
+    //qDebug()<<"2";
+    //qDebug()<<light;
     return light;
 }
 
@@ -109,7 +109,6 @@ void LaserGenerator::keyPressEvent(QKeyEvent *event){
             //qDebug()<<scene();
             //qDebug()<<light->line().length();
             //qDebug()<<light->line().p1().x()<<light->line().p2().x();
-            //qDebug()<<light->isVisible();
             //game->lights.append(new Light(QPoint(x()+5,y()),this->laser_angle));
             //game->lights.append(light);
             //qDebug()<<(game->lights);

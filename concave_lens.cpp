@@ -20,12 +20,12 @@ Concave_Lens::Concave_Lens(QPointF p, double angle, double length, double focal_
 }
 
 QPointF Concave_Lens::intersect(Light light){
-    return light.intersect_point(base_line);
+    return *light.intersect_point(base_line);
 }
 
 void Concave_Lens::refract(Light light){
     QPointF p0 = intersect(light);
-    QPointF p1 = light.intersect_point(focal_line);
+    QPointF p1 = *light.intersect_point(focal_line);
     double ang_ref = QLineF(p1,QPointF(0,0)).angle();
     Light *refract = new Light(p0,ang_ref);
     light.line().setP2(p0);
