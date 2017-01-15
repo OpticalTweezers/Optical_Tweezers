@@ -10,12 +10,16 @@ Light::Light(QPointF p, double angle){
     line_of_light.setAngle(angle);
     line_of_light.setLength(2500);
     this->setLine(line_of_light);
+    //qDebug()<<line_of_light.angle();
+    //qDebug()<<this->line().angle();
     QPen pen;
     pen.setColor(Qt::white);
     pen.setWidth(2);
     this->setPen(pen);
     this->reset_point_at_screen();
     this->intensity=1;
+    //qDebug()<<this->line().p2();
+    //exit(0);
 }
 
 Light::Light(Light &lt){
@@ -86,6 +90,11 @@ QPointF Light::intersect_screen(){
     QLineF down(0,600,800,600);
     QLineF left(0,0,0,600);
     QLineF right(800,0,800,600);
+
+    //重置光线P2
+    QLineF new_reset_line(this->line());
+    new_reset_line.setLength(2500);
+    this->setLine(new_reset_line);
     //qDebug()<<this->line().intersect(right,nullptr);
     //qDebug()<<intersect_point(right).y()<<"right_point";
     if(this->line().intersect(up,nullptr)==1) return intersect_point(up);
@@ -93,6 +102,7 @@ QPointF Light::intersect_screen(){
     else if(this->line().intersect(left,nullptr)==1) return intersect_point(left);
     else if(this->line().intersect(right,nullptr)==1) return intersect_point(right);
     //qDebug()<<intersect_point(right).x()<<"right_point";
+
 }
 
 //重置终点为与屏幕的交点
@@ -100,7 +110,10 @@ void Light::reset_point_at_screen(){
     //qDebug()<<"mark";
     //qDebug()<<intersect_screen().x();
     //qDebug()<<"mark2";
-    this->line().setP2(intersect_screen());
+    QLineF new_Line(this->line().p1(),intersect_screen());
+    this->setLine(new_Line);
+    //qDebug()<<intersect_screen();
+    //qDebug()<<this->line().p2();
 }
 
 

@@ -43,7 +43,10 @@ Settings::~Settings()
 void Settings::on_stage1_clicked(){
     this->hide();
     game = new Game();
+    qDebug()<<"game";
+    qDebug()<<game;
     game->show();
+
 }
 
 void Settings::on_stage2_clicked()

@@ -5,6 +5,7 @@
 #include <game.h>
 #include <QDebug>
 #include <QTimer>
+extern Game*game;
 Win_Zone::Win_Zone(){
     QPointF center(700,400);
     double width=100;
@@ -24,6 +25,7 @@ void Win_Zone::detect_ball(){
             //qDebug()<<"win_dialog_show";
             win_dialog=new Win_dialog();
             win_dialog->show();
+            scene()->removeItem(game->get_ball());
             timer->stop();
         }
     }
