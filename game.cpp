@@ -32,7 +32,8 @@ Game::Game(){
     music->play();
 
     //add mirror
-    mirror =new Mirror(QLineF(QPointF(500,400),QPointF(600,500)));
+    mirror =new Mirror(QLineF(QPointF(300,40),QPointF(600,260)));
+    qDebug()<<"addmirror";
     scene->addItem(mirror);
 
     //add win_zone
@@ -46,7 +47,7 @@ Ball *Game::get_ball(){
 }
 
 LaserGenerator* Game::get_lasergenerator(){
-    qDebug()<<"1";
+    //qDebug()<<"1";
     return laserGenerator;
 }
 

@@ -289,7 +289,7 @@ void Ball::v_change(){
     qDebug()<<force.y();
 }
 
-void Ball::realize_refract(){
+void Ball::coodinate_light_refract(Light *light){
     qDebug()<<"SSS";
     //qDebug()<<intersect_with_light();
     bool flag=intersect_with_light();
@@ -298,62 +298,56 @@ void Ball::realize_refract(){
         forces.clear();
     }
     //exit(0);
-    QList<QGraphicsItem*>lights=collidingItems();
-    for(int i=0;i<lights.size();i++){
-        if(typeid(*lights[i])==typeid(Light)){
-            if(lights[i]){
-                if(refract_in_ball&&refract_out){
-                    if(flag){
-                        qDebug()<<"in_ball1";
-                        scene()->removeItem(refract_in_ball);
-                        scene()->removeItem(refract_out);
-                        write_refract_in_ball(nullptr);
-                        write_refract_out(nullptr);
-                        Light * tl=lights[i];
-                        //qDebug()<<'*'
-                        refract(tl);
-                        //qDebug()<<"hello";
-                    }
-                    else{
-                        qDebug()<<"in_ball2";
-                        scene()->removeItem(refract_in_ball);
-                        scene()->removeItem(refract_out);
-                        write_refract_in_ball(nullptr);
-                        write_refract_out(nullptr);
-                        lights[i]->reset_point_at_screen(); //重置light_lg端点
-                    }
-                }
-                else{
-                    qDebug()<<"no light";
-                    if(refract_in_ball){
-                        if(flag){
-                            qDebug()<<"no light_in_ball1";
-                            scene()->removeItem(refract_in_ball);
-                            write_refract_in_ball(nullptr);
-                            Light * tl=lights[i];
-                            //qDebug()<<'*'<<tl;
-                            refract(tl);
-                        }
-
-                    }
-                    else{
-                        if(flag){
-                            qDebug()<<"no light_in_ball2";
-                            qDebug()<<refract_in_ball;
-                            qDebug()<<refract_out;
-                            Light * tl=lights[i];
-                            //qDebug()<<'*'<<tl;
-                            qDebug()<<tl;
-                            refract(tl);
-                            qDebug()<<"666";
-                        }
-                    }
-
-                 }
+    if(light){
+        if(refract_in_ball&&refract_out){
+            if(flag){
+                qDebug()<<"in_ball1";
+                scene()->removeItem(refract_in_ball);
+                scene()->removeItem(refract_out);
+                write_refract_in_ball(nullptr);
+                write_refract_out(nullptr);
+                Light * tl=light;
+                //qDebug()<<'*'
+                refract(tl);
+                //qDebug()<<"hello";
+            }
+            else{
+                qDebug()<<"in_ball2";
+                scene()->removeItem(refract_in_ball);
+                scene()->removeItem(refract_out);
+                write_refract_in_ball(nullptr);
+                write_refract_out(nullptr);
+                light->reset_point_at_screen(); //重置light_lg端点
             }
         }
-    }
+        else{
+            qDebug()<<"no light";
+            if(refract_in_ball){
+                if(flag){
+                    qDebug()<<"no light_in_ball1";
+                    scene()->removeItem(refract_in_ball);
+                    write_refract_in_ball(nullptr);
+                    Light * tl=light;
+                    //qDebug()<<'*'<<tl;
+                    refract(tl);
+                }
 
+            }
+            else{
+                if(flag){
+                    qDebug()<<"no light_in_ball2";
+                    qDebug()<<refract_in_ball;
+                    qDebug()<<refract_out;
+                    Light * tl=light;
+                    //qDebug()<<'*'<<tl;
+                    qDebug()<<tl;
+                    refract(tl);
+                    qDebug()<<"666";
+                }
+            }
+
+         }
+    }
 }
 
 void Ball::force_add(){

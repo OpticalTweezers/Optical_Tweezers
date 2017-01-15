@@ -9,8 +9,8 @@ public:
     Light(QPointF,double angle);
     Light(Light& lt);
     //Light(QPointF p1, QPointF p2);
-    QPointF intersect_point(QLineF line);
-    QPointF intersect_screen();
+    QPointF *intersect_point(QLineF line);
+    QPointF *intersect_screen();
     void reset_point_at_screen();
     void reflect(QLineF l);
     void set_intensity(double i);

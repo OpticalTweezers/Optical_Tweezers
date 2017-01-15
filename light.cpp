@@ -43,7 +43,7 @@ Light::Light(QPointF p1,QPointF p2){
 
 //求光线与固定线段的交点
 
-QPointF Light::intersect_point(QLineF ln){
+QPointF *Light::intersect_point(QLineF ln){
     double x0=this->line().p1().x();
     double y0=this->line().p1().y();
     double x1=ln.p1().x();
@@ -55,37 +55,40 @@ QPointF Light::intersect_point(QLineF ln){
         //line与ln平行于y轴
         if(beta==90||beta==270){
             if(alpha==90||alpha==270)
-                return QPointF(-1,-1);
+                return nullptr;
             else{
                 double x=x1;
                 double y=qTan(alpha)*(x1-x0)+y0;
-                return QPointF(x,y);
+                QPointF* the_intersec_point =new QPointF(x,y);
+                return the_intersec_point;
                 //qDebug()<<x0<<y0<<x1<<y1<<alpha<<beta<<x<<y;
             }
         }
         else if(alpha==90||alpha==270){
             double x=x0;
             double y=y1+qTan(beta)*(x0-x1);
-            return QPointF(x,y);
+            QPointF* the_intersec_point =new QPointF(x,y);
+            return the_intersec_point;
             //qDebug()<<x0<<y0<<x1<<y1<<alpha<<beta<<x<<y;
         }
 
         //line与ln平行
         else if(qTan(beta)==qTan(alpha)){
-            return QPointF(-1,-1);
+            return nullptr;
         }
         //普通情况
         else {
             double x = (y0-y1+x1*qTan(beta)-x0*qTan(alpha))/(qTan(beta)-qTan(alpha));
             double y = y0+qTan(alpha)*(x-x0);
             //qDebug()<<x0<<y0<<x1<<y1<<alpha<<beta<<x<<y;
-            return QPointF(x,y);
+            QPointF* the_intersec_point =new QPointF(x,y);
+            return the_intersec_point;
         }
     }
 }
 
 //求出光线与屏幕的交点
-QPointF Light::intersect_screen(){
+QPointF *Light::intersect_screen(){
     QLineF up(0,0,800,0);
     QLineF down(0,600,800,600);
     QLineF left(0,0,0,600);
@@ -96,7 +99,7 @@ QPointF Light::intersect_screen(){
     new_reset_line.setLength(2500);
     this->setLine(new_reset_line);
     //qDebug()<<this->line().intersect(right,nullptr);
-    //qDebug()<<intersect_point(right).y()<<"right_point";
+    //qDebug()<<*intersect_point(right).y()<<"right_point";
     if(this->line().intersect(up,nullptr)==1) return intersect_point(up);
     else if(this->line().intersect(down,nullptr)==1) return intersect_point(down);
     else if(this->line().intersect(left,nullptr)==1) return intersect_point(left);
@@ -110,38 +113,21 @@ void Light::reset_point_at_screen(){
     //qDebug()<<"mark";
     //qDebug()<<intersect_screen().x();
     //qDebug()<<"mark2";
-    QLineF new_Line(this->line().p1(),intersect_screen());
+    QLineF new_Line(this->line().p1(),*intersect_screen());
     this->setLine(new_Line);
     //qDebug()<<intersect_screen();
     //qDebug()<<this->line().p2();
 }
 
 
-//光线与平面镜的反射
-void Light::reflect(QLineF l){
-    Light light(QPointF(0,0),0);
-    if(this->line().intersect(l,nullptr)!=1) return ;  //If the class definition declares a move constructor or move assignment operator,
-                                                            //the implicitly declared copy constructor is defined as deleted
-    else {
-        QPointF p=intersect_point(l);
-        this->line().setP2(p);
-        double alpha = this->line().angle();
-        double beta = l.angle();
-        double ref_angle;
-        ref_angle = (2*beta-alpha)>360 ? (2*beta-alpha)-360:(2*beta-alpha);
-        game->lights.append(new Light(p,ref_angle));
-        scene()->addItem(game->lights[game->lights.size()-1]);
-    }
-}
 
-//设置光强
 void Light::set_intensity(double i){
     this->intensity=i;
 }
 
 void Light::simple_refract_in(QLineF l){
      if(this->line().intersect(l,nullptr)==1){
-        QPointF p0 = this->intersect_point(l);
+        QPointF p0 = *intersect_point(l);
         this->line().setP2(p0);
         double alpha = this->line().angle();
         double beta0 = l.angle();
@@ -166,7 +152,7 @@ void Light::simple_refract_in(QLineF l){
 
 void Light::simple_refract_out(QLineF l){
     if(this->line().intersect(l,nullptr)==1){
-        QPointF p0 = this->intersect_point(l);
+        QPointF p0 = *intersect_point(l);
         this->line().setP2(p0);
         double alpha = this->line().angle();
         double beta0 = l.angle();
@@ -196,7 +182,7 @@ void Light::simple_refract_out(QLineF l){
 double Light::refract_angle(QLineF l){
     //以下代码与上个函数基本相同，只不过要返回出射角，以便双棱镜处使用
     if(this->line().intersect(l,nullptr)==1){
-        QPointF p0 = this->intersect_point(l);
+        QPointF p0 = *intersect_point(l);
         this->line().setP2(p0);
         double alpha = this->line().angle();
         double beta0 = l.angle();
@@ -226,7 +212,7 @@ double Light::refract_angle_light(QLineF l){
         double non_degree=999;
     //以下代码与上上个函数基本相同，只不过要返回出射光线的角度，以便双棱镜处使用
         if(this->line().intersect(l,nullptr)==1){
-            QPointF p0 = this->intersect_point(l);
+            QPointF p0 = *intersect_point(l);
             this->line().setP2(p0);
             double alpha = this->line().angle();
             double beta0 = l.angle();
