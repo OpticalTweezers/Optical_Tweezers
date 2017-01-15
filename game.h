@@ -19,6 +19,8 @@ public:
     LaserGenerator *get_lasergenerator();
     Mirror * get_mirror();
     Win_Zone *get_win_zone();
+
+    void write_ball(Ball *bl);
 private:
     Ball *ball=nullptr;
     LaserGenerator *laserGenerator=nullptr;

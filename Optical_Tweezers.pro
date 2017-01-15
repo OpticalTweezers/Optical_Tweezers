@@ -11,9 +11,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Optical_Tweezers
 TEMPLATE = app
-
+CONFIG += ordered
 
 SOURCES += main.cpp \
+    Settings.cpp \
     Game.cpp \
     Ball.cpp \
     Mirror.cpp \
@@ -21,7 +22,6 @@ SOURCES += main.cpp \
     Lasergenerator.cpp \
     Loading.cpp \
     Mainwindow.cpp \
-    Settings.cpp \
     Win_Zone.cpp \
     Convex_Mirror.cpp \
     Concave_Mirror.cpp \
@@ -46,12 +46,12 @@ SOURCES += main.cpp \
 
 
 HEADERS  += \
+    Settings.h \
     Game.h \
     Ball.h \
     Mirror.h \
     Light.h \
     Lasergenerator.h \
-    Settings.h \
     Mainwindow.h \
     Loading.h \
     Win_Zone.h \

@@ -45,7 +45,8 @@ Ball *Game::get_ball(){
     return ball;
 }
 
-LaserGenerator *Game::get_lasergenerator(){
+LaserGenerator* Game::get_lasergenerator(){
+    qDebug()<<"1";
     return laserGenerator;
 }
 
@@ -55,6 +56,10 @@ Mirror *Game::get_mirror(){
 
 Win_Zone *Game::get_win_zone(){
     return win_zone;
+}
+
+void Game::write_ball(Ball *bl){
+    ball=bl;
 }
 
 
